@@ -322,5 +322,14 @@ Before relying on a new deployment, verify:
 - The application is a challenge prototype, not a production electricity-trading system.
 
 ## AI Tools and Development Assistance
+AI-assisted development tools were used during implementation, debugging, testing, and documentation. Generated suggestions and code changes were reviewed and validated as part of the development workflow.
 
-AI-assisted development
+Acknowledgements
+
+Elexon BMRS for providing the actual and forecast generation datasets.
+
+Gridbricks for the hiring challenge and problem statement.
+
+License
+
+No license has been specified for this repository. Unless a license is added, reuse and redistribution are subject to the applicable default copyright rules.
