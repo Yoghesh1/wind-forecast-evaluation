@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: ./backend
+    env_file: [.env]
+    environment:
+      CACHE_PATH: /srv/data/elexon_cache.json
+    ports: ["8000:8000"]
+    volumes: ["elexon-cache:/srv/data"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
+    ports: ["5173:80"]
+    depends_on: [backend]
+volumes:
+  elexon-cache:

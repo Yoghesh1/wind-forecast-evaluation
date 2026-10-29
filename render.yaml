@@ -1,0 +1,17 @@
+# Render Blueprint for the backend. The free plan has no persistent disk and sleeps when idle,
+# so the data cache is rebuilt from Elexon after each cold start (AUTO_REFRESH_ON_START=true).
+services:
+  - type: web
+    name: wind-forecast-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: CORS_ORIGINS
+        sync: false          # set to your Vercel URL, e.g. https://<project>.vercel.app
+      - key: REFRESH_TOKEN
+        generateValue: true
+      - key: AUTO_REFRESH_ON_START
+        value: "true"
